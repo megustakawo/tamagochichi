@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamagotchi Virtual - Club de Ciencias</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Franja superior de referencia (Color 1 de la paleta: #fbf6f0) -->
+    <header class="top-banner">
+        <div class="banner-inner">
+            <span class="science-tag">🔬 Club de Ciencias</span>
+            <h1 class="project-title">Tamagotchi Virtual Interactivo</h1>
+        </div>
+    </header>
+
+    <!-- Contenido principal con el fondo de la maqueta (#f3e1de) -->
+    <main class="main-layout">
+        <div class="layout-grid">
+            
+            <!-- CONTENEDOR IZQUIERDO: Caja azul (#cddafd) con mascota y opciones -->
+            <section class="left-system-box" aria-label="Consola de la Mascota">
+                <!-- Panel Mascota (el "bichito") -->
+                <div class="inner-panel panel-mascota">
+                    <div class="panel-header-label">mascota</div>
+
+                    <div class="mascota-meta">
+                        <div class="pet-name-chip" id="petNameDisplay" title="Haz clic para renombrar">
+                            <span id="petName">Tama</span> ✏️
+                        </div>
+                        <div class="pet-age-chip">
+                            ⏱️ <span id="petAge">0m 0s</span>
+                        </div>
+                    </div>
+
+                    <!-- Globo de diálogo / pensamiento -->
+                    <div class="speech-bubble" id="speechBubble">
+                        ¡Hola! Cuídame bien.
+                    </div>
+
+                    <!-- Escenario del Bichito -->
+                    <div class="bichito-stage">
+                        <div class="floating-icons" id="floatingIcons"></div>
+                        <div class="pet-avatar bounce" id="petAvatar" title="¡Hazme clic para mimarme!">
+                            <!-- Imagen de la Skin activa -->
+                            <img id="petImg" class="pet-img" src="{{ url_for('static', filename='skins/conejo.png') }}" alt="Mascota" draggable="false">
+                            
+                            <!-- Mascota SVG interactiva clásica -->
+                            <svg class="pet-svg" viewBox="0 0 120 120" id="petSvg" style="display: none;">
+                                <!-- Cuerpo base -->
+                                <circle cx="60" cy="65" r="42" class="body-color" />
+                                
+                                <!-- Orejas / Cuernitos -->
+                                <path d="M 32 36 Q 22 10 42 24 Z" class="ear-color" />
+                                <path d="M 88 36 Q 98 10 78 24 Z" class="ear-color" />
+
+                                <!-- Mejillas -->
+                                <circle cx="36" cy="68" r="6" class="cheek-color" />
+                                <circle cx="84" cy="68" r="6" class="cheek-color" />
+
+                                <!-- Ojos -->
+                                <g id="petEyes">
+                                    <circle cx="44" cy="58" r="5" class="eye-color" />
+                                    <circle cx="76" cy="58" r="5" class="eye-color" />
+                                    <circle cx="46" cy="56" r="1.8" fill="#fff" />
+                                    <circle cx="78" cy="56" r="1.8" fill="#fff" />
+                                </g>
+
+                                <!-- Boca -->
+                                <g id="petMouth">
+                                    <path d="M 52 70 Q 60 78 68 70" stroke="#222" stroke-width="3" fill="none" stroke-linecap="round" />
+                                </g>
+
+                                <!-- Patitas -->
+                                <ellipse cx="44" cy="103" rx="10" ry="5" class="ear-color" />
+                                <ellipse cx="76" cy="103" rx="10" ry="5" class="ear-color" />
+                            </svg>
+
+                            <!-- Insignia flotante de emoción/estado -->
+                            <div class="pet-emotion-overlay" id="petEmotionOverlay"></div>
+                        </div>
+                    </div>
+
+                    <!-- Estado anímico -->
+                    <div class="mood-container">
+                        <span id="moodLabel">Estado: Contento</span>
+                    </div>
+
+                    <!-- Selector de Skins -->
+                    <div class="skin-selector-panel">
+                        <div class="skin-selector-header">
+                            <span>🎨 Cambiar Skin:</span>
+                        </div>
+                        <div class="skin-options" id="skinPicker">
+                            <button type="button" class="skin-card active" data-skin="conejo" title="Conejito Blanco 🐰">
+                                <img src="{{ url_for('static', filename='skins/conejo.png') }}" alt="Conejo" class="skin-thumb">
+                                <span class="skin-name">Conejo</span>
+                            </button>
+                            <button type="button" class="skin-card" data-skin="gato" title="Gatito Orejón 🐱">
+                                <img src="{{ url_for('static', filename='skins/gato.png') }}" alt="Gato" class="skin-thumb">
+                                <span class="skin-name">Gato</span>
+                            </button>
+                            <button type="button" class="skin-card" data-skin="ciervo" title="Ciervito Travieso 🦌">
+                                <img src="{{ url_for('static', filename='skins/ciervo.png') }}" alt="Ciervo" class="skin-thumb">
+                                <span class="skin-name">Ciervo</span>
+                            </button>
+                            <button type="button" class="skin-card" data-skin="clasico" title="Bichito Clásico 🐣">
+                                <span class="skin-thumb-icon">🐣</span>
+                                <span class="skin-name">Clásico</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divisor central entre mascota y opciones -->
+                <div class="vertical-divider"></div>
+
+                <!-- Panel Opciones -->
+                <div class="inner-panel panel-opciones">
+                    <div class="panel-header-label">opciones</div>
+
+                    <!-- Barras de estado -->
+                    <div class="stats-group">
+                        <!-- Hambre -->
+                        <div class="stat-row">
+                            <div class="stat-text">
+                                <span class="stat-name">🍖 Hambre</span>
+                                <span class="stat-val" id="valHambre">20%</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill hunger-fill" id="barHambre" style="width: 20%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Energía -->
+                        <div class="stat-row">
+                            <div class="stat-text">
+                                <span class="stat-name">⚡ Energía</span>
+                                <span class="stat-val" id="valEnergia">100%</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill energy-fill" id="barEnergia" style="width: 100%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Felicidad -->
+                        <div class="stat-row">
+                            <div class="stat-text">
+                                <span class="stat-name">❤️ Felicidad</span>
+                                <span class="stat-val" id="valFelicidad">80%</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill happiness-fill" id="barFelicidad" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="actions-grid">
+                        <button class="action-btn btn-feed" id="btnAlimentar" title="Dar de comer">
+                            <span class="btn-emoji">🍎</span>
+                            <span class="btn-lbl">Comer</span>
+                        </button>
+
+                        <button class="action-btn btn-play" id="btnJugar" title="Jugar juntos">
+                            <span class="btn-emoji">⚽</span>
+                            <span class="btn-lbl">Jugar</span>
+                        </button>
+
+                        <button class="action-btn btn-sleep" id="btnDormir" title="Hacer dormir / despertar">
+                            <span class="btn-emoji" id="sleepIcon">💤</span>
+                            <span class="btn-lbl" id="sleepText">Dormir</span>
+                        </button>
+
+                        <button class="action-btn btn-pet" id="btnAcariciar" title="Acariciar">
+                            <span class="btn-emoji">✨</span>
+                            <span class="btn-lbl">Mimar</span>
+                        </button>
+                    </div>
+
+                    <!-- Botones auxiliares -->
+                    <div class="extra-actions">
+                        <button class="btn-aux" id="btnSonido">🔊 Sonido</button>
+                        <button class="btn-aux" id="btnCambiarSkin" title="Cambiar a la siguiente apariencia">🎨 Skin</button>
+                        <button class="btn-aux" id="btnReiniciar">🔄 Renacer</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- COLUMNA DERECHA: Tarjetas de IA y Eventos según el PDF -->
+            <section class="right-stack" aria-label="Panel Inteligente y Registro">
+                
+                <!-- Tarjeta 1: Hablar con el tamagochi (IA) -->
+                <div class="ref-card card-ia">
+                    <div class="ref-header">
+                        <h2>hablar con el tamagochi</h2>
+                    </div>
+                    <div class="ref-body">
+                        <p class="ia-subtext">La IA responde considerando el hambre, energía y felicidad de <strong id="chatPetName">Tama</strong>.</p>
+                        
+                        <form id="formChat" class="chat-form">
+                            <input type="text" id="inputMensaje" placeholder="Escribe un mensaje aquí..." maxlength="120" autocomplete="off">
+                            <button type="submit" id="btnEnviarMensaje" class="chat-btn">
+                                <span>Enviar</span> 🚀
+                            </button>
+                        </form>
+
+                        <div class="quick-chips">
+                            <button type="button" class="quick-btn" data-msg="¿Cómo te sientes ahora mismo?">¿Cómo estás?</button>
+                            <button type="button" class="quick-btn" data-msg="¿Tienes hambre o sed?">¿Tienes hambre?</button>
+                            <button type="button" class="quick-btn" data-msg="¡Eres mi mejor amigo!">¡Te quiero mucho!</button>
+                            <button type="button" class="quick-btn" data-msg="¿Qué quieres hacer hoy?">¿Qué hacemos?</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2: Eventos (Bitácora) -->
+                <div class="ref-card card-eventos">
+                    <div class="ref-header">
+                        <h2>eventos</h2>
+                    </div>
+                    <div class="ref-body">
+                        <ul class="activity-log" id="activityLog">
+                            <li>Esperando actividades de la mascota...</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- Franja inferior de referencia (Color 1 de la paleta: #fbf6f0) -->
+    <footer class="bottom-banner">
+        <p>🔬 <strong>Club de Ciencias</strong> — Proyecto Tamagotchi con Python, Flask, CSS3 y API de Inteligencia Artificial.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

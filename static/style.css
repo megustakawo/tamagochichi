@@ -1,0 +1,697 @@
+/* ========================================================
+   TAMAGOTCHI VIRTUAL - CLUB DE CIENCIAS
+   Estilos inspirados en la maqueta y paleta de referencia PDF
+   ======================================================== */
+
+:root {
+    /* Paleta exacta extraída del PDF */
+    --color-banner-bg: #fbf6f0;      /* Muestra 1: Franjas superior e inferior */
+    --color-main-bg: #f3e1de;        /* Muestra 2: Fondo principal suave */
+    --color-sand-light: #e9d8c4;     /* Muestra 3: Tono arena claro */
+    --color-caramel: #e4c7a8;        /* Muestra 4: Caramelo cálido */
+    --color-taupe: #cbb9a6;          /* Muestra 5: Taupe / madera suave */
+    --color-periwinkle: #cddafd;     /* Muestra 6: Azul pastel periwinkle para marcos y cabeceras */
+    --color-mauve: #ded2d5;          /* Muestra 7: Malva suave / lila */
+    
+    /* Colores estructurales */
+    --color-panel-inner: #e4e5f2;    /* Fondo de paneles internos (mascota y opciones) */
+    --color-card-white: #ffffff;     /* Fondo blanco puro para el cuerpo de tarjetas */
+    --color-text-dark: #22262f;      /* Texto principal */
+    --color-text-muted: #5e687a;     /* Texto secundario */
+    --color-border-subtle: #d6e0fc;  /* Borde tenue */
+
+    /* Tipografía */
+    --font-ui: 'Fredoka', 'Nunito', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-main-bg);
+    color: var(--color-text-dark);
+    font-family: var(--font-ui);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========================================================
+   FRANJAS SUPERIOR E INFERIOR (Color: #fbf6f0)
+   ======================================================== */
+.top-banner {
+    background-color: var(--color-banner-bg);
+    padding: 16px 24px;
+    border-bottom: 2px solid rgba(205, 218, 253, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.banner-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.science-tag {
+    background-color: var(--color-periwinkle);
+    color: #1e2640;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.project-title {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+.bottom-banner {
+    background-color: var(--color-banner-bg);
+    padding: 14px 20px;
+    border-top: 2px solid rgba(205, 218, 253, 0.4);
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    margin-top: auto;
+}
+
+/* ========================================================
+   CONTENEDOR PRINCIPAL Y GRID DE 2 COLUMNAS (MAQUETA PDF)
+   ======================================================== */
+.main-layout {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 36px 20px;
+}
+
+.layout-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 36px;
+    width: 100%;
+    max-width: 1140px;
+    align-items: stretch;
+}
+
+/* ========================================================
+   COLUMNA IZQUIERDA: CONTENEDOR AZUL (#cddafd)
+   Contiene "mascota" y "opciones"
+   ======================================================== */
+.left-system-box {
+    background-color: var(--color-periwinkle);
+    border-radius: 28px;
+    padding: 22px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    box-shadow: 0 14px 30px rgba(70, 85, 120, 0.12);
+    min-height: 520px;
+}
+
+.vertical-divider {
+    width: 3px;
+    background-color: rgba(255, 255, 255, 0.45);
+    border-radius: 3px;
+    margin: 6px 0;
+}
+
+/* Paneles internos ("mascota" y "opciones") */
+.inner-panel {
+    background-color: var(--color-panel-inner);
+    border-radius: 20px;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.7);
+}
+
+.panel-header-label {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e2640;
+    margin-bottom: 12px;
+    text-transform: lowercase;
+    letter-spacing: 0.5px;
+}
+
+/* ========================================================
+   PANEL IZQUIERDO: "MASCOTA" (El Bichito)
+   ======================================================== */
+.mascota-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.pet-name-chip {
+    background: #ffffff;
+    padding: 3px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.1s;
+}
+
+.pet-name-chip:hover {
+    transform: scale(1.03);
+}
+
+.pet-age-chip {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 3px 8px;
+    border-radius: 8px;
+}
+
+/* Globo de diálogo */
+.speech-bubble {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    line-height: 1.35;
+    text-align: center;
+    color: var(--color-text-dark);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+    margin-bottom: 12px;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(205, 218, 253, 0.5);
+}
+
+/* Escenario del Bichito */
+.bichito-stage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 10px 0;
+}
+
+.floating-icons {
+    position: absolute;
+    top: 0;
+    font-size: 1.8rem;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.pet-avatar {
+    width: 140px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.pet-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.08));
+}
+
+.pet-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
+    user-select: none;
+    -webkit-user-drag: none;
+    transition: filter 0.3s ease, transform 0.2s ease;
+}
+
+.pet-emotion-overlay {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    font-size: 1.4rem;
+    pointer-events: none;
+    animation: pulseBadge 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes pulseBadge {
+    0% { transform: scale(0.9); }
+    100% { transform: scale(1.15); }
+}
+
+.body-color { fill: #fdd835; }
+.ear-color { fill: #fbc02d; }
+.cheek-color { fill: #ff8a80; }
+.eye-color { fill: #263238; }
+
+/* Animaciones del personaje */
+.pet-avatar.bounce {
+    animation: petBounce 1.4s infinite ease-in-out;
+}
+
+.pet-avatar.sleeping {
+    animation: petSleep 2.5s infinite ease-in-out;
+    filter: grayscale(30%) brightness(0.92);
+}
+
+.pet-avatar.eating {
+    animation: petEat 0.4s ease-in-out 3;
+}
+
+.pet-avatar.playing {
+    animation: petPlay 0.5s ease-in-out infinite alternate;
+}
+
+.pet-avatar.dead {
+    animation: petFaint 1s forwards;
+    filter: grayscale(90%);
+}
+
+@keyframes petBounce {
+    0%, 100% { transform: translateY(0) scale(1, 1); }
+    50% { transform: translateY(-10px) scale(0.96, 1.04); }
+}
+
+@keyframes petSleep {
+    0%, 100% { transform: scale(1, 0.95) rotate(-3deg); }
+    50% { transform: scale(0.97, 1) rotate(3deg); }
+}
+
+@keyframes petEat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15, 0.9); }
+}
+
+@keyframes petPlay {
+    0% { transform: translateY(0) rotate(-8deg); }
+    100% { transform: translateY(-14px) rotate(8deg); }
+}
+
+@keyframes petFaint {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(90deg) translateY(15px); }
+}
+
+/* Estado Anímico */
+.mood-container {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 6px 10px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #3b4252;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* Selector de Skins */
+.skin-selector-panel {
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 14px;
+    padding: 8px 10px;
+    border: 1px solid rgba(205, 218, 253, 0.8);
+}
+
+.skin-selector-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #3b4252;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.skin-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.skin-card {
+    background: #ffffff;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 4px 2px 3px 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.18s ease;
+}
+
+.skin-card:hover {
+    transform: translateY(-2px);
+    border-color: #bcd0fc;
+    box-shadow: 0 4px 8px rgba(70, 85, 120, 0.12);
+}
+
+.skin-card.active {
+    background: #edf2ff;
+    border-color: #688af7;
+    box-shadow: 0 0 0 2px rgba(104, 138, 247, 0.3), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.skin-thumb {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.skin-thumb-icon {
+    font-size: 1.35rem;
+    line-height: 32px;
+    display: inline-block;
+}
+
+.skin-name {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #374151;
+    white-space: nowrap;
+}
+
+.skin-card.active .skin-name {
+    color: #2540af;
+    font-weight: 700;
+}
+
+/* ========================================================
+   PANEL DERECHO: "OPCIONES"
+   ======================================================== */
+.stats-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.stat-row {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.stat-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+.bar-track {
+    width: 100%;
+    height: 9px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.4s ease, background-color 0.3s;
+}
+
+.hunger-fill { background: linear-gradient(90deg, #fbbf24, #f87171); }
+.energy-fill { background: linear-gradient(90deg, #fcd34d, #34d399); }
+.happiness-fill { background: linear-gradient(90deg, #f472b6, #ec4899); }
+
+/* Botones de Acción (Estilo paleta) */
+.actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.action-btn {
+    border: none;
+    border-radius: 14px;
+    padding: 10px 6px;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.88rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+    transition: transform 0.12s, box-shadow 0.12s, filter 0.15s;
+    color: #2b2e38;
+}
+
+.action-btn:hover {
+    filter: brightness(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+}
+
+.action-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.btn-emoji {
+    font-size: 1.25rem;
+}
+
+/* Colores de los botones según la paleta del PDF */
+.btn-feed { background-color: var(--color-caramel); }
+.btn-play { background-color: #bcd0fc; }
+.btn-sleep { background-color: var(--color-mauve); }
+.btn-pet { background-color: var(--color-sand-light); }
+
+/* Botones Auxiliares */
+.extra-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.btn-aux {
+    flex: 1;
+    background: #ffffff;
+    border: 1.5px solid rgba(205, 218, 253, 0.8);
+    border-radius: 10px;
+    padding: 6px 8px;
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-aux:hover {
+    background: #f1f4fc;
+    color: #1e2640;
+}
+
+/* ========================================================
+   COLUMNA DERECHA: TARJETAS CON CABECERA AZUL (#cddafd)
+   "hablar con el tamagochi" y "eventos"
+   ======================================================== */
+.right-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: space-between;
+}
+
+.ref-card {
+    background-color: var(--color-card-white);
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(70, 85, 120, 0.09);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cabecera azul (#cddafd) exacta al PDF */
+.ref-header {
+    background-color: var(--color-periwinkle);
+    padding: 12px 22px;
+}
+
+.ref-header h2 {
+    font-size: 1.18rem;
+    font-weight: 600;
+    color: #1a1e29;
+    letter-spacing: 0.3px;
+    text-transform: lowercase;
+}
+
+/* Cuerpo blanco de la tarjeta */
+.ref-body {
+    background-color: var(--color-card-white);
+    padding: 18px 22px 22px 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Tarjeta IA: Formulario y fichas */
+.ia-subtext {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.chat-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.chat-form input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.chat-form input:focus {
+    border-color: #a4bcfa;
+    box-shadow: 0 0 0 3px rgba(205, 218, 253, 0.4);
+}
+
+.chat-btn {
+    background-color: var(--color-periwinkle);
+    color: #1e2640;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.chat-btn:hover {
+    background-color: #b9ccfc;
+}
+
+.chat-btn:active {
+    transform: scale(0.97);
+}
+
+.chat-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Botones rápidos de sugerencia */
+.quick-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.quick-btn {
+    background-color: var(--color-panel-inner);
+    color: #2b324a;
+    border: 1px solid rgba(205, 218, 253, 0.7);
+    padding: 5px 11px;
+    border-radius: 14px;
+    font-family: var(--font-ui);
+    font-size: 0.76rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.quick-btn:hover {
+    background-color: var(--color-periwinkle);
+    border-color: #9cb5f7;
+}
+
+.quick-btn:active {
+    transform: scale(0.96);
+}
+
+/* Tarjeta Eventos: Registro */
+.activity-log {
+    list-style: none;
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 190px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.activity-log li {
+    background-color: #f8fafc;
+    border-left: 4px solid var(--color-periwinkle);
+    padding: 8px 12px;
+    border-radius: 8px;
+    line-height: 1.4;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================================
+   RESPONSIVIDAD (Móviles y Tablets)
+   ======================================================== */
+@media (max-width: 900px) {
+    .layout-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .left-system-box {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .vertical-divider {
+        width: 100%;
+        height: 3px;
+        margin: 4px 0;
+    }
+
+    .banner-inner {
+        justify-content: center;
+        text-align: center;
+    }
+}
